@@ -1,4 +1,4 @@
-//  SDT CHANNEL INT'L LTD — shared site behavior
+// THE SDT CHANNEL INT'L LTD — shared site behavior
 
 document.addEventListener('DOMContentLoaded', function () {
 
