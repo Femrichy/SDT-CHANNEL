@@ -505,3 +505,22 @@ section{ padding:88px 0; }
   .whatsapp-fab{ animation:none !important; }
 }
 
+/* ============================================================
+   PAGE TRANSITIONS
+   Fades the whole page out before navigating to another page,
+   and fades the new page in on load, so moving between Home /
+   About / Services / Products / Contact feels continuous
+   instead of a hard flash-cut.
+   ============================================================ */
+body{
+  opacity:0;
+  transition:opacity .38s ease;
+}
+body.is-loaded{ opacity:1; }
+body.is-leaving{ opacity:0; }
+
+@media(prefers-reduced-motion: reduce){
+  body{ opacity:1 !important; transition:none !important; }
+}
+
+

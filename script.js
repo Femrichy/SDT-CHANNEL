@@ -1,5 +1,48 @@
 // THE SDT CHANNEL INT'L LTD — shared site behavior
 
+// ---------------------------------------------------------------
+// Page transitions — fade the page in on load, and fade it out
+// before following a link to another page on this site, so
+// navigation feels continuous instead of a hard flash-cut.
+// Runs immediately (not gated behind DOMContentLoaded) so the
+// fade-in starts as soon as possible.
+// ---------------------------------------------------------------
+(function () {
+  var prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function revealPage() {
+    document.body.classList.remove('is-leaving');
+    // double rAF so the browser registers the starting state before transitioning
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        document.body.classList.add('is-loaded');
+      });
+    });
+  }
+  revealPage();
+
+  // Restore the page instantly if it's pulled from the back/forward cache
+  window.addEventListener('pageshow', function (e) {
+    if (e.persisted) revealPage();
+  });
+
+  if (!prefersReduced) {
+    document.addEventListener('click', function (e) {
+      var link = e.target.closest('a');
+      if (!link) return;
+      var href = link.getAttribute('href');
+      if (!href) return;
+      if (link.target === '_blank' || link.hasAttribute('download')) return;
+      if (href.startsWith('#') || href.startsWith('http') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+      e.preventDefault();
+      document.body.classList.add('is-leaving');
+      setTimeout(function () { window.location.href = href; }, 260);
+    });
+  }
+})();
+
 document.addEventListener('DOMContentLoaded', function () {
 
   // Mobile nav toggle
