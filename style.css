@@ -28,6 +28,10 @@
 
 *,*::before,*::after{ box-sizing:border-box; }
 html{ scroll-behavior:smooth; }
+html,body{
+  max-width:100%;
+  overflow-x:hidden;
+}
 body{
   margin:0;
   font-family:var(--font-body);
@@ -55,6 +59,10 @@ button{ font-family:inherit; cursor:pointer; }
   max-width:var(--container);
   margin:0 auto;
   padding:0 24px;
+  width:100%;
+}
+@media(max-width:480px){
+  .container{ padding:0 16px; }
 }
 
 .eyebrow{
@@ -133,17 +141,22 @@ button{ font-family:inherit; cursor:pointer; }
   display:flex; justify-content:space-between; align-items:center;
   padding-top:8px; padding-bottom:8px; gap:16px; flex-wrap:wrap;
 }
-.topbar a{ color:rgba(255,255,255,.75); }
-.topbar-links{ display:flex; gap:22px; }
+.topbar a{ color:rgba(255,255,255,.75); white-space:nowrap; }
+.topbar-links{ display:flex; gap:22px; flex-wrap:wrap; row-gap:4px; min-width:0; }
 .topbar-links a:hover{ color:var(--gold); }
-.topbar-emergency{ color:var(--gold); font-weight:600; }
+.topbar-emergency{ color:var(--gold); font-weight:600; white-space:nowrap; }
+
+@media(max-width:480px){
+  .topbar-links{ gap:12px; }
+  .topbar .container{ gap:8px; }
+}
 
 .navbar{
   display:flex; align-items:center; justify-content:space-between;
   padding:14px 0;
   gap:24px;
 }
-.brand{ display:flex; align-items:center; gap:12px; }
+.brand{ display:flex; align-items:center; gap:12px; min-width:0; flex-shrink:1; }
 .brand img{ height:48px; width:auto; }
 .brand-text{ font-family:var(--font-display); font-weight:800; font-size:1.05rem; color:var(--navy-deep); line-height:1.15; }
 .brand-text small{ display:block; font-family:var(--font-body); font-weight:600; font-size:.62rem; letter-spacing:.12em; color:var(--slate); text-transform:uppercase; }
