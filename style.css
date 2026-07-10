@@ -231,8 +231,12 @@ button{ font-family:inherit; cursor:pointer; }
 .hero-icon-card svg{ width:34px; height:34px; margin:0 auto 8px; stroke:var(--gold); }
 
 @media(max-width:900px){
-  .hero-grid{ grid-template-columns:1fr; padding:72px 0 64px; }
+  .hero-grid{ grid-template-columns:1fr; padding:96px 0 72px; }
   .hero-art{ height:280px; }
+}
+@media(max-width:480px){
+  .hero-grid{ padding:88px 0 56px; gap:32px; }
+  .hero-art{ height:220px; }
 }
 
 /* ---- Sections ---------------------------------------------- */
@@ -351,6 +355,12 @@ section{ padding:88px 0; }
 /* breadcrumb / page header */
 .page-hero{
   background:var(--navy-deep); color:var(--white); padding:88px 0 72px; position:relative; overflow:hidden;
+}
+@media(max-width:900px){
+  .page-hero{ padding:72px 0 56px; }
+}
+@media(max-width:480px){
+  .page-hero{ padding:64px 0 48px; }
 }
 .page-hero .container{ position:relative; z-index:2; }
 .page-hero h1{ color:var(--white); font-size:clamp(1.9rem,3.4vw,2.7rem); }
